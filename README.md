@@ -1,2 +1,17 @@
 # cms-skeleton
 Judicial case management system web application meant to serve as a skeleton for individual state implementations 
+
+## Reasoning
+In my time working as an application analyst for a county court, I have seen firsthand the challenges that courts face in managing their cases and keeping their information up to date with the ongoing municipality ordinance changes, and state level legislative changes. I have also seen the challenges this brings to users first hand as they have to navigate multiple systems that do not integrate with one another such as:
+    * Jail management systems
+    * Court recording software
+    * Document management systems
+    * Reporting tools
+    * Email and communication tools
+    * And many more
+
+My goal in this project is to provide a baseline for any IT department in a court system to build off of and customize to meet their specific needs. I want to create a system that is user friendly, efficient, and can meet users where they are at in terms of their technical abilities and the specific needs of their role in the court system. Too often, solutions are built assuming that all users at all levels in the judicial system have the same needs and technical abilities which can lead to judges refusing to adopt a system that overloads them with features they do not need, clerks that struggle to use a system that does not mimic the physical forms they are used to which leads to data entry errors and inefficiencies, and a general lack of adoption and engagement with the system which leads to stale information and inefficiencies in the court system. 
+
+I also want to create a system that can facilitate the updating of ordinance information in a central repository for higher organizations to access and update, which is currently a major pain point for courts as they have to manually check for updates on multiple websites and manually update their systems with this information which can lead to stale information and inefficiencies in the court system. I've even seen that courts may wait to receive updated ordinance information on citations instead of proactively updating these changes. Lastly, I want to create an open source solution that can be easily customized and extended by users and organizations, leading to increased adoption and user engagement with the system, and ultimately leading to improved efficiency and user satisfaction in the court system.
+
+My reasons for this project are purely done out of spite for the current solutions in the market and a desire to create a better solution for courts and users. I have no intention of monetizing this project and I will make it available for free to anyone who wants to use it or contribute to it. I hope that this project can serve as a valuable resource for courts and users, and that it can help to improve the efficiency and user satisfaction in the court system. I also hope that this project can serve as a valuable learning resource for developers who are interested in building case management systems or who are interested in contributing to open source projects. I want to create a project that is well-documented, easy to understand, and easy to contribute to, so that anyone who is interested in getting involved can do so easily.
