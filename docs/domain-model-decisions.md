@@ -140,10 +140,10 @@ erDiagram
     PERSON_RECORD ||--o{ PERSON_MATCH : "record B"
     PERSON_MATCH ||--o{ PERSON_MATCH_REVIEW : "has review history"
 
-    CASE ||--o{ CASE_PARTICIPANT_HISTORY : "has participation history"
+    CASES ||--o{ CASE_PARTICIPANT_HISTORY : "has participation history"
     PERSON_RECORD ||--o{ CASE_PARTICIPANT_HISTORY : "represents participant"
 
-    CASE ||--o{ EVENT : "has"
+    CASES ||--o{ EVENT : "has"
     EVENT ||--o{ EVENT_PARTICIPANT : "records participation"
     PERSON_RECORD ||--o{ EVENT_PARTICIPANT : "represents participant"
 ```
@@ -304,7 +304,7 @@ Identity-resolution decisions and canonical-person associations are related but 
 
 ## 5. Case Domain
 
-### 5.1 `CASE`
+### 5.1 `CASES`
 
 **Purpose:** Represents a court case maintained by the CMS.
 
