@@ -140,11 +140,11 @@ erDiagram
     PERSON_RECORD ||--o{ PERSON_MATCH : "record B"
     PERSON_MATCH ||--o{ PERSON_MATCH_REVIEW : "has review history"
 
-    CASES ||--o{ CASE_PARTICIPANT_HISTORY : "has participation history"
+    CASES ||--o{ CASE_PARTICIPANT_HISTORY : "have participation history"
     PERSON_RECORD ||--o{ CASE_PARTICIPANT_HISTORY : "represents participant"
 
-    CASES ||--o{ EVENT : "has"
-    EVENT ||--o{ EVENT_PARTICIPANT : "records participation"
+    CASES ||--o{ EVENTS : "have"
+    EVENTS ||--o{ EVENT_PARTICIPANT : "record participation"
     PERSON_RECORD ||--o{ EVENT_PARTICIPANT : "represents participant"
 ```
 
@@ -416,7 +416,7 @@ An event represents a scheduled court proceeding or activity associated with a c
 
 This model concerns court proceedings, not every event in a person's interaction with the justice system. Arrests, detention, and jail placement or movement belong to separate operational domains.
 
-### 7.2 `EVENT`
+### 7.2 `EVENTS`
 
 **Purpose:** Records a court proceeding or activity associated with a case.
 
