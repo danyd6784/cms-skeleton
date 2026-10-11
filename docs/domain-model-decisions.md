@@ -93,7 +93,7 @@ erDiagram
         string notes
     }
 
-    CASE {
+    CASES {
         int case_id PK
         string case_number UK
         string case_type
@@ -115,7 +115,7 @@ erDiagram
         datetime updated_at
     }
 
-    EVENT {
+    EVENTS {
         int event_id PK
         int case_id FK
         string event_type
