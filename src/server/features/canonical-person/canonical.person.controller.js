@@ -1,8 +1,8 @@
-import canonicalPersonService from "canonical.person.service";
+import canonicalPersonService from "./canonical.person.service.js";
 //The controller parses input, calls services and sends responses
 const getAll = async (req, res, next) => {
     try {
-        const results = null;
+        let results = null;
         const { query, limit = 50, offset = 0 } = req.query;
 
         if (query) {
