@@ -1,8 +1,8 @@
 import express from "express";
-import canonicalPersonRouter from "canonical.person.router.js";
+import canonicalPersonRouter from "./features/canonical-person/canonical.person.router.js";
 
 const apiRouter = express.Router();
 
-apiRouter.use("/canonicalPerson", canonicalPersonRouter);
+apiRouter.use("/canonical-people", canonicalPersonRouter);
 
 export default apiRouter;
