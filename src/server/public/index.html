@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Management System</title>
+</head>
+<body>
+
+    <header>
+        <h1>Case Management System</h1>
+        <p>Canonical Person Management</p>
+    </header>
+
+    <main>
+        <section id="search-section">
+            <h2>Search Canonical People</h2>
+
+            <form action="" method="get" id="searchForm">
+                <label for="searchQuery">Search Canonical People</label>
+                <input type="text" name="searchQuery" id="searchQuery" placeholder="Search Canonical People">
+                <button type="submit">Search</button>
+            </form>
+
+        </section>
+
+        <section id="results-section">
+            <h2>Canonical People</h2>
+
+            <!-- Results table goes here -->
+             <table id="canonicalPeople">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Middle Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="canonicalPeopleResults">
+                </tbody>
+             </table>
+
+        </section>
+
+    </main>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
