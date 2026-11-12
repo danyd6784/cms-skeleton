@@ -1,4 +1,6 @@
 const resultsContainer = document.querySelector("#canonicalPeopleResults");
+const statusBox = document.getElementById("create-result");
+const createForm = document.getElementById("createForm")
 
 const getCanonicalPeople = async () => {
     // Fetch records from the API
@@ -34,5 +36,34 @@ const getCanonicalPeople = async () => {
     });
 
 };
+
+
+createForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(createForm);
+    
+    const personData = {
+        fname : formData.get("fname"),
+        mname : formData.get("mname"),
+        lname : formData.get("lname"),
+        pfx : formData.get("pfx"),
+        sfx : formData.get("sfx")
+    }
+
+    const response = await fetch("/api/canonical-people/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(personData)
+    })
+
+    if(!response.ok){
+        throw new Error("Failed to create canonical person record");
+    }
+    const createdPerson = await response.json()
+    statusBox.textContent = JSON.stringify(createdPerson)
+})
 
 getCanonicalPeople()
