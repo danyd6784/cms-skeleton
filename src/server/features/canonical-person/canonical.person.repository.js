@@ -29,4 +29,25 @@ const search = async ({ query, limit, offset }) => {
     return result.rows;
 };
 
-export default { getAll, search };
+const insert = async(personData) => {
+    const result = await pool.query(
+        `
+        INSERT INTO canonical_person 
+        (first_name, middle_name, last_name, prefix, suffix)
+        VALUES($1, $2, $3, $4, $5)
+
+        RETURNING canonical_person_id, first_name, middle_name,
+          last_name, prefix, suffix, created_at, updated_at;
+        `,
+        [
+            personData.firstName, 
+            personData.middleName, 
+            personData.lastName,
+            personData.prefix,
+            personData.suffix
+        ]
+    )
+    return result.rows[0];
+}
+
+export default { getAll, search, insert };

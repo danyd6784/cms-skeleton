@@ -8,8 +8,9 @@ canonicalPersonRouter.get("/", canonicalPersonController.getAll);
 /*
 canonicalPersonRouter.get("/:id", canonicalPersonController.getById);
 canonicalPersonRouter.get("/:id/personRecords/", canonicalPersonController.getAllPersonRecords);
-
-canonicalPersonRouter.post("/"); //add a canonical person record
+*/
+canonicalPersonRouter.post("/", canonicalPersonController.create); //add a canonical person record
+/*
 canonicalPersonRouter.post("/:id/"); //add a person association to the canonical person record
 
 canonicalPersonRouter.put("/:id"); //update a canonical personRecord

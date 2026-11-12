@@ -32,8 +32,40 @@ export const createCanonicalPersonService = (repository) => {
             query: query.trim(),
             ...pagination
         });
+    };
+    
+    const validateCanonicalPersonInformation = ({fname, mname, lname, pfx, sfx}) => {
+        if (typeof fname !== "string" || !fname.trim()) {
+            throw new Error("Invalid first name")
+        }
+        if (mname != null && typeof mname !== "string") {
+            throw new Error("Invalid middle name");
+        }
+        if (typeof lname !== "string" || !lname.trim()) {
+            throw new Error("Invalid last name")
+        }
+        if (pfx != null && typeof pfx !== "string") {
+            throw new Error("Invalid prefix");
+        }
+        if (sfx != null && typeof sfx !== "string") {
+            throw new Error("Invalid suffix");
+        }
+
+        return {
+            firstName: fname.trim(),
+            middleName: mname?.trim() || null,
+            lastName: lname.trim(),
+            prefix: pfx?.trim() || null,
+            suffix: sfx?.trim() || null
+        }
     }
-    return {getAll, search};
+
+    const createCanonicalPerson = async (personData) => {
+        const canonicalPersonInformation = validateCanonicalPersonInformation(personData);
+        return repository.insert(canonicalPersonInformation);
+    }
+
+    return {getAll, search, createCanonicalPerson};
 }
 
 const canonicalPersonService = createCanonicalPersonService(canonicalPersonRepository);

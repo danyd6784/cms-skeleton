@@ -69,3 +69,90 @@ test("getAll passes validated pagination to repository", async () => {
     assert.equal(results.length, 2);
 })
 
+/*
+POST ENDPOINT TESTING
+*/
+test("personInfo validation rejects requests with no firstName", async () => {
+    await assert.rejects(
+        canonicalPersonService.createCanonicalPerson({
+            mname: "",
+            lname: "Doe",
+            pfx: "",
+            sfx: ""
+        }),
+        { message: "Invalid first name" }
+    )
+})
+
+test("personInfo validation rejects requests with no lastName", async () => {
+    await assert.rejects(
+        canonicalPersonService.createCanonicalPerson({
+            fname: "John",
+            mname: "",
+            pfx: "",
+            sfx: ""
+        }),
+        { message: "Invalid last name" }
+    )
+})
+test("personInfo validation rejects non string middle name", async () => {
+    await assert.rejects(
+        canonicalPersonService.createCanonicalPerson({
+            fname: "John",
+            mname: 42,
+            lname: "Doe",
+            pfx: "",
+            sfx: ""
+        }),
+        { message: "Invalid middle name" }
+    )
+})
+test("createCanonicalPerson passes validated person information to repository", async () => {
+    let receivedArguments;
+
+    const mockRepository = {
+        insert: async (personData) => {
+            receivedArguments = personData;
+            return {
+                    canonical_person_id: 1,
+                    first_name: personData.firstName,
+                    middle_name: personData.middleName,
+                    last_name: personData.lastName,
+                    prefix: personData.prefix,
+                    suffix: personData.suffix,
+                    created_at: "2026-01-01",
+                    updated_at: "2026-01-01"
+            }
+            
+        }
+    }
+
+    const service = createCanonicalPersonService(mockRepository);
+
+    const results = await service.createCanonicalPerson({
+        fname: "John",
+        mname: "Dwayne",
+        lname: "Doe",
+        pfx: "Mr.",
+        sfx: ""
+    });
+
+    assert.deepEqual(receivedArguments, {
+        firstName: "John",
+        middleName: "Dwayne",
+        lastName: "Doe",
+        prefix: "Mr.",
+        suffix: null
+    })
+
+    assert.deepEqual(results, {
+        canonical_person_id: 1,
+        first_name: "John",
+        middle_name: "Dwayne",
+        last_name: "Doe",
+        prefix: "Mr.",
+        suffix: null,
+        created_at: "2026-01-01",
+        updated_at: "2026-01-01"
+    });
+})

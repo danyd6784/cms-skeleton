@@ -19,4 +19,14 @@ const getAll = async (req, res, next) => {
         next(error);
     }
 };
-export default { getAll };
+
+const create = async (req, res, next) => {
+    try{
+        let results = null
+        results = await canonicalPersonService.createCanonicalPerson(req.body)
+        res.status(201).json(results);
+    }catch (error) {
+        next(error);
+    }
+}
+export default { getAll, create };
