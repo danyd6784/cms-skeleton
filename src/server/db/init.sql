@@ -5,8 +5,8 @@ CREATE TABLE CANONICAL_PERSON (
     last_name                   TEXT,
     prefix                      TEXT,
     suffix                      TEXT,
-    created_at                  TIMESTAMP,
-    updated_at                  TIMESTAMP
+    created_at                  TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at                  TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE PERSON_RECORD (
@@ -25,8 +25,8 @@ CREATE TABLE PERSON_RECORD (
     phone_number                TEXT,
     email                       TEXT,
     is_primary                  BOOLEAN,
-    created_at                  TIMESTAMP,
-    updated_at                  TIMESTAMP
+    created_at                  TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at                  TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE PERSON_MATCH (
@@ -35,7 +35,7 @@ CREATE TABLE PERSON_MATCH (
     person_record_b_id          BIGINT REFERENCES PERSON_RECORD(person_record_id),
     method                      TEXT,
     confidence                  DECIMAL,
-    created_at                  TIMESTAMP
+    created_at                  TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE PERSON_MATCH_REVIEW (
@@ -54,8 +54,8 @@ CREATE TABLE CASES (
     status                      TEXT,
     filed_at                    TIMESTAMP,
     closed_at                   TIMESTAMP,
-    created_at                  TIMESTAMP,
-    updated_at                  TIMESTAMP
+    created_at                  TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at                  TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE CASE_PARTICIPANT_HISTORY (
@@ -65,8 +65,8 @@ CREATE TABLE CASE_PARTICIPANT_HISTORY (
     role                        TEXT,
     effective_from              TIMESTAMP,
     effective_to                TIMESTAMP,
-    created_at                  TIMESTAMP,
-    updated_at                  TIMESTAMP
+    created_at                  TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at                  TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE EVENTS (
@@ -76,8 +76,8 @@ CREATE TABLE EVENTS (
     status                      TEXT,
     scheduled_at                TIMESTAMP,
     completed_at                TIMESTAMP,
-    created_at                  TIMESTAMP,
-    updated_at                  TIMESTAMP
+    created_at                  TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at                  TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE EVENT_PARTICIPANT (
@@ -85,5 +85,5 @@ CREATE TABLE EVENT_PARTICIPANT (
     event_id                    BIGINT REFERENCES EVENTS(event_id),
     person_record_id            BIGINT REFERENCES PERSON_RECORD(person_record_id),
     role                        TEXT,
-    created_at                  TIMESTAMP
+    created_at                  TIMESTAMPTZ  NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
