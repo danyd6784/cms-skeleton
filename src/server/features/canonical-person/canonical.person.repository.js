@@ -3,11 +3,19 @@ import pool from "../../db/database.js";
 const getAll = async ({ limit, offset }) => {
     const result = await pool.query(
         `
-      SELECT canonical_person_id, created_at
-      FROM canonical_person
-      ORDER BY canonical_person_id
-      LIMIT $1 OFFSET $2;
-    `,
+        SELECT
+            canonical_person_id,
+            first_name,
+            middle_name,
+            last_name,
+            prefix,
+            suffix,
+            created_at,
+            updated_at
+        FROM canonical_person
+        ORDER BY canonical_person_id
+        LIMIT $1 OFFSET $2;
+        `,
         [limit, offset],
     );
 
@@ -17,9 +25,19 @@ const getAll = async ({ limit, offset }) => {
 const search = async ({ query, limit, offset }) => {
     const result = await pool.query(
         `
-        SELECT canonical_person_id, created_at
+        SELECT
+            canonical_person_id,
+            first_name,
+            middle_name,
+            last_name,
+            prefix,
+            suffix,
+            created_at,
+            updated_at
         FROM canonical_person
         WHERE first_name ILIKE $1
+            OR middle_name ILIKE $1
+            OR last_name ILIKE $1
         ORDER BY canonical_person_id
         LIMIT $2 OFFSET $3;
         `,
@@ -32,7 +50,7 @@ const search = async ({ query, limit, offset }) => {
 const insert = async(personData) => {
     const result = await pool.query(
         `
-        INSERT INTO canonical_person 
+        INSERT INTO canonical_person
         (first_name, middle_name, last_name, prefix, suffix)
         VALUES($1, $2, $3, $4, $5)
 
@@ -40,8 +58,8 @@ const insert = async(personData) => {
           last_name, prefix, suffix, created_at, updated_at;
         `,
         [
-            personData.firstName, 
-            personData.middleName, 
+            personData.firstName,
+            personData.middleName,
             personData.lastName,
             personData.prefix,
             personData.suffix
