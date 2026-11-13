@@ -20,6 +20,16 @@ const getAll = async (req, res, next) => {
     }
 };
 
+const getById = async (req, res, next) => {
+    try {
+        let results = null;
+        results = await canonicalPersonService.getCanonicalPerson(req.params.id)
+        res.json(results);
+    } catch (error) {
+        next(error)
+    }
+}
+
 const create = async (req, res, next) => {
     try{
         let results = null
@@ -29,4 +39,4 @@ const create = async (req, res, next) => {
         next(error);
     }
 }
-export default { getAll, create };
+export default { getAll, getById, create };

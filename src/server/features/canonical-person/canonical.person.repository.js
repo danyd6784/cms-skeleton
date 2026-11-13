@@ -47,6 +47,18 @@ const search = async ({ query, limit, offset }) => {
     return result.rows;
 };
 
+const getCanonicalPersonByID = async(personData) => {
+    const result = await pool.query(
+        `
+        SELECT *
+        FROM canonical_person
+        WHERE canonical_person_id = $1
+        `,
+        [personData.id]
+    )
+    return result.rows;
+}
+
 const insert = async(personData) => {
     const result = await pool.query(
         `
@@ -68,4 +80,4 @@ const insert = async(personData) => {
     return result.rows[0];
 }
 
-export default { getAll, search, insert };
+export default { getAll, search, getCanonicalPersonByID, insert };

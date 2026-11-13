@@ -5,7 +5,7 @@ export const createCanonicalPersonService = (repository) => {
     const validatePagination = ({limit = 50, offset = 0}) => {
         const pageSize = Number(limit);
         const pageOffset = Number(offset);
-    
+
         if (!Number.isInteger(pageSize) || pageSize < 1 || pageSize > 100){
             throw new Error("Invalid page size");
         }
@@ -17,12 +17,12 @@ export const createCanonicalPersonService = (repository) => {
             offset: pageOffset
         }
     }
-    
+
     const getAll = async ({ limit = 50, offset = 0 }) => {
         const pagination = validatePagination({limit, offset});
         return repository.getAll(pagination);
     };
-    
+
     const search = async ({query, limit = 50, offset = 0}) => {
         const pagination = validatePagination({limit, offset});
         if (typeof query !== "string" || !query.trim()) {
@@ -33,7 +33,27 @@ export const createCanonicalPersonService = (repository) => {
             ...pagination
         });
     };
-    
+
+    const validateId = (canonicalPersonID) => {
+        if (typeof canonicalPersonID !== "string"){
+            throw new Error("Id must be passed in as a string")
+        }
+        const parsedId = Number.parseInt(canonicalPersonID)
+        if (
+            typeof parsedId !== "number" ||
+            parsedId < 1 ||
+            !Number.isInteger(parsedId)
+        ) {
+            throw new Error("Invalid id");
+        }
+        return { id: parsedId };
+    }
+
+    const getCanonicalPerson = async(canonicalPersonID) => {
+        const id = validateId(canonicalPersonID);
+        return repository.getCanonicalPersonByID(id)
+    }
+
     const validateCanonicalPersonInformation = ({fname, mname, lname, pfx, sfx}) => {
         if (typeof fname !== "string" || !fname.trim()) {
             throw new Error("Invalid first name")
@@ -65,7 +85,7 @@ export const createCanonicalPersonService = (repository) => {
         return repository.insert(canonicalPersonInformation);
     }
 
-    return {getAll, search, createCanonicalPerson};
+    return {getAll, search, getCanonicalPerson, createCanonicalPerson};
 }
 
 const canonicalPersonService = createCanonicalPersonService(canonicalPersonRepository);

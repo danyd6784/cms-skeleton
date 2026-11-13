@@ -5,8 +5,8 @@ import canonicalPersonController from "./canonical.person.controller.js";
 const canonicalPersonRouter = express.Router();
 
 canonicalPersonRouter.get("/", canonicalPersonController.getAll);
-/*
 canonicalPersonRouter.get("/:id", canonicalPersonController.getById);
+/*
 canonicalPersonRouter.get("/:id/personRecords/", canonicalPersonController.getAllPersonRecords);
 */
 canonicalPersonRouter.post("/", canonicalPersonController.create); //add a canonical person record
